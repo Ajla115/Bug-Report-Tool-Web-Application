@@ -26,3 +26,5 @@ Notes:
 20. indexjs je kao index.php sve se odvojeno odmah pise u svoje zasebne folder
 21. Ide prvo routes, pa controller uzima podatke od njega, servici biznis logika, i dao sloj je za pristup bazi i samo preko njega bi se trebalo pristupati bazi. ALI mi cemo danas raditi samo routes i controller
 22. Kovencija je da se naziv imena modela uvijek pise sa velikom slovom
+23. Bcrypt dependency se dodaje da bismo mogli hashovati sifre, i naravno on ide sa npm install bcrypt
+24. Sa JSON objektom pod string ide i key i value od key value para, a kod normalnog objekta ide samo value pod string, a key ne ide
