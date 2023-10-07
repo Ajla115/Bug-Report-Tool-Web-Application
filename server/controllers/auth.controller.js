@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 
 import User from '../models/User.model.js';
 import { SALT_ROUNDS } from '../constants.js';
+import { getUserByEmail } from '../dao/user.dao.js';
 
 export const register = async (req, res) => {
     const {password, ...data} = req.body;
@@ -29,8 +30,32 @@ export const register = async (req, res) => {
 
 //when we write the data in the request body in the Postman, the keys of key value pairs should be the same as in the User.model.js
 
-export const login = (req, res) => {
-    console.log("Login route found!");
-    res.status(201).send('Login is a success!')
+export const login = async (req, res) => {
+    const { email, password } = req.body; //this is the data from the body of the Postman that we enter
+    if( !password  || !email){
+        return res.status(400).send('Missing credentials. Please write in both your email and password.');
+        //here we put return, because if this is the case, don't go any further but just return message and exit
+    }
+
+    try {
+
+    const user  = await getUserByEmail(email);
+
+    const match = await bcrypt.compare(password, user.password);
+    //built-in method compare is used to compare the entered password and the password matched to a email from database whih was sent as parameter
+
+    if(match){
+        console.log(user);
+        res.status(201).send('Login is a success!');
+    } else {
+        console.log('Login was not successful')
+        res.status(401).send('Wrong password or email.');
+    }
+    } catch(e){
+        console.log("Error! Please try again.");
+        res.status(500).send('Ups.. Something went wrong');
+    }
 }
+    
+
 
