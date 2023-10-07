@@ -5,7 +5,12 @@ import express from 'express';       //imported express
 
 import bodyParser from 'body-parser';   
 import mongoose from 'mongoose';  
+
+//always have space between installed and imported dependencies
+
 import authRoutes from './routes/auth.routes.js'; 
+import bugRoutes from './routes/bug.routes.js';
+
 //this authRoutes is just a name for something that is just a variable, so anything else could be put here as a name
 //this is a variable where exported value from file auth.routes.js will be saved
 //if a const was expored in  auth.routes.js, then exact name should have been used    
@@ -39,6 +44,8 @@ app.get('/', (req, res) => {
 app.use('/auth', authRoutes);
 //this is a trigger to know that routes which are saved under name authRoutes will be started
 //something like a middle man that sends a signal to auth.routes.js, when spots that a route prefix /auth/ has been called
+
+app.use('/bugs', bugRoutes);
 
 //Models for queries, findByID, getOne ect, use it for making schemas etc
 //This bug report is how we are naming a Database in the MongoDB to which we are connecting
