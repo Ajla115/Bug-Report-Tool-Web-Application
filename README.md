@@ -19,3 +19,9 @@ Notes:
 15. Mongoose smo instalirali npm install mongoose i importovali ga na pocetak node.js jer se sve dependencies importuju na vrh na pocetak i nakon toga smo odradili konekciju preko mongoose.connect('mongodb://127.0.0.1:27017/bug-report')
   .then(() => console.log('Connected to the database!'));
 16. Ovo je Mongoose -> Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node. js. It manages relationships between data, provides schema validation, and is used to translate between objects in code and the representation of those objects in MongoDB
+17. Ovo se koristi u cmd za pokretanje servera PS C:\Users\User> mongod --dbpath=c:\data\db i to za pokretanje ovoga servisa iz mongoose, mongoose.connect('mongodb://127.0.0.1:27017/bug-report')
+  .then(() => console.log('Connected to the database!')); i ovo bug-report je kako smo mi dali ime bazi koja ce biti u MongoDB, takoder umjesto ovoga skracenog nacina smo mogli pisati i duzi nacin koji bi isao C:\data\db> "C:\Program Files\MongoDB\Server\7.0\bin\mongod.exe" --dbpath="c:\data\db"
+18. route idu u routes folder i tu se pisu sa preko router i exportuju se
+19. logika ide u controllers folder
+20. indexjs je kao index.php sve se odvojeno odmah pise u svoje zasebne folder
+21. Ide prvo routes, pa controller uzima podatke od njega, servici biznis logika, i dao sloj je za pristup bazi i samo preko njega bi se trebalo pristupati bazi. ALI mi cemo danas raditi samo routes i controller
