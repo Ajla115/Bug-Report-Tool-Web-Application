@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 import User from '../models/User.model.js';
-import { SALT_ROUNDS } from '../constants.js';
+import { SALT_ROUNDS, SECRET } from '../constants.js';
 import { getUserByEmail } from '../dao/user.dao.js';
 
 export const register = async (req, res) => {
@@ -40,13 +41,23 @@ export const login = async (req, res) => {
     try {
 
     const user  = await getUserByEmail(email);
+    console.log(user._id.toString());
 
     const match = await bcrypt.compare(password, user.password);
     //built-in method compare is used to compare the entered password and the password matched to a email from database whih was sent as parameter
 
     if(match){
+
+        const token = jwt.sign({
+            id:user._id.toString(),
+            email: user.email
+        }, SECRET, {expiresIn: 60 * 60});
+        //this 60*60 means 1 hours, it is also possible to recognize 1h
+
         console.log(user);
-        res.status(201).send('Login is a success!');
+        res.status(201).send({token});
+      
+
     } else {
         console.log('Login was not successful')
         res.status(401).send('Wrong password or email.');

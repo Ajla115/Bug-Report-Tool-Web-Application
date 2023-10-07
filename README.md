@@ -28,3 +28,4 @@ Notes:
 22. Kovencija je da se naziv imena modela uvijek pise sa velikom slovom
 23. Bcrypt dependency se dodaje da bismo mogli hashovati sifre, i naravno on ide sa npm install bcrypt
 24. Sa JSON objektom pod string ide i key i value od key value para, a kod normalnog objekta ide samo value pod string, a key ne ide
+25. Za JSON Web Token takoder ima svoju biblioteku
