@@ -44,6 +44,7 @@ export const login = async (req, res) => {
     console.log(user._id.toString());
 
     const match = await bcrypt.compare(password, user.password);
+    console.log(match);
     //built-in method compare is used to compare the entered password and the password matched to a email from database whih was sent as parameter
 
     if(match){

@@ -5,6 +5,7 @@ import express from 'express';       //imported express
 
 import bodyParser from 'body-parser';   
 import mongoose from 'mongoose';  
+import cors from 'cors';
 
 //always have space between installed and imported dependencies
 
@@ -19,6 +20,11 @@ import bugRoutes from './routes/bug.routes.js';
 
 const app = express()                //declared express app
 const PORT = 4000                    //declared main port
+
+app.use(cors({origin: 'http://localhost:3000'}));
+//this is for errors that happen during logging in, and cors is node's type of middleware
+//so, the cors will actually help you  make requests for resources to an external back-end server from frontend side
+//the cors also keeps the backend secure from unwanted incoming calls from frontend
 
 //it is very beneficial to write const variables with a capital letter, such as PORT
 
