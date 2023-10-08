@@ -16,7 +16,7 @@ const bugSchema = new Schema({
     severity : String    
 });
 
-//We declared timestap with multipl features just to describe it more precise, 
+//We declared timestap with multiple features just to describe it more precise, 
 //however only one value will be returned for the value of this column
 //so for the timestamp, type is date, and if we don't write it, it wil be by default calculated
 const Bug = mongoose.model('bugs', bugSchema);

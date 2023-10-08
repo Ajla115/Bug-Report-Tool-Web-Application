@@ -50,7 +50,9 @@ export const login = async (req, res) => {
 
         const token = jwt.sign({
             id:user._id.toString(),
-            email: user.email
+            email: user.email,
+            role: user.role 
+            //this part in JWT Token will atually tell us the role of the logged in person
         }, SECRET, {expiresIn: 60 * 60});
         //this 60*60 means 1 hours, it is also possible to recognize 1h
 
