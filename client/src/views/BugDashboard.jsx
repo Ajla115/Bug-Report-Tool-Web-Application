@@ -3,9 +3,11 @@ import BugReportOutlinedIcon from '@mui/icons-material/BugReportOutlined';
 import { useState, useEffect } from 'react';
 import axiosInstance from "../axios-instance.js";
 import { decodeToken } from "react-jwt";
+import CreateBugModal from './views/CreateBugModal.jsx'
 
 const BugDashboard = () => {
     const [bugs, setBugs] = useState([]);
+    const[isCreateBugModalOpen,setIsCreateBugModalOpen] = useState(false);
     const token = localStorage.getItem('token');
     const user = decodeToken(token);
     {/*this part here is how you rename a variable, so you can use the value of variable decodedToken under a different name in the rest of the code, decodedToken: user*/}
@@ -34,7 +36,8 @@ const BugDashboard = () => {
                 <BugReportOutlinedIcon/>
                 </Box>
                 <Box sx={{marginTop: "10px"}}>
-                    {user?.role === 'QA' && <Button variant ="outlined" sx={{marginLeft: "5px"}}>Create Bug</Button>}
+                    {user?.role === 'QA' && <Button variant ="outlined" sx={{marginLeft: "5px"}} 
+                    onClick={() => setIsCreateBugModalOpen(true)}>Create Bug</Button>}
                 </Box>
 
                 {/*typography is a replacement for a p tag in HTML, it is used for text, and it also needs to be imported*/}
@@ -63,6 +66,12 @@ const BugDashboard = () => {
 
                     ))}
                 </Box>
+                {isCreateBugModalOpen && (
+                    <CreateBugModal
+                     open = { isCreateBugModalOpen}
+                    setIsCreateBugModalOpen = {setIsCreateBugModalOpen}/>
+                    
+                )}
         </Box>
     );
 };
