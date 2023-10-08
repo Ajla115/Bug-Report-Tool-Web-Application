@@ -1,10 +1,14 @@
 import {Card, CardContent, CardActions, Button, TextField, Box} from '@mui/material';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ( ) => {
     const[email, setEmail] = useState("");
     const[password, setPassword] = useState("");
+
+    //everything that starts with use- is a hook from react
+    const navigate = useNavigate();
 
     console.log(email);
     console.log(password);
@@ -13,13 +17,21 @@ const Login = ( ) => {
         try{
           const result = await axios.post('http://localhost:4000/auth/login',
          {email: email, password: password}); 
-         const {token}= result.data;
-         localStorage.setItem('token', token);
-        }
+
+
+         //this ? checks if the variable is undefined before going on to work with their property
+         if(result?.data && result?.status === 201){
+
+           const {token}= result.data;
+           localStorage.setItem('token', token);
+
+          navigate("/bugs-overview")
+           
+         }
+      }
         catch(e){
             console.log(e);
         }
-        
     }
 
 

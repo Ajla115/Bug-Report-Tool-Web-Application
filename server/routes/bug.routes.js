@@ -2,7 +2,7 @@ import express from 'express';
 
 //since we exported middleware as default variable, we can write it just like this without " "
 import authMiddleware from '../middleware/auth.middleware.js';
-import {getAllBugs, createBug, changeCompletedStatus, getBugsByUserId} from '../controllers/bug.controller.js'
+import {getAllBugs, createBug, changeCompletedStatus} from '../controllers/bug.controller.js'
 
 const router = express.Router();
 
@@ -13,7 +13,6 @@ router.post('/', authMiddleware, createBug)
 
 router.put('/:id/completedStatus', authMiddleware, changeCompletedStatus);
 
-router.get('/:userId', authMiddleware, getBugsByUserId);
 
 export default router;
 
